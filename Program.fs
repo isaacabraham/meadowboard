@@ -1,35 +1,6 @@
 open Meadow
-open System
-open System.Threading
 open Meadow.Devices
-open Meadow.Foundation
-open Meadow.Foundation.Leds
-
-module HelloWorld =
-    let colors = [ Color.AliceBlue; Color.AntiqueWhite; Color.Black; Color.DarkGray; Color.Cyan; Color.Green; Color.GreenYellow; Color.Yellow; Color.Orange; Color.OrangeRed; Color.Red; Color.MediumVioletRed; Color.Purple; Color.Magenta; Color.Pink ]
-
-    type F7Micro with
-        member device.CreateLed () =
-            RgbPwmLed(
-                device,
-                device.Pins.OnboardLedRed,
-                device.Pins.OnboardLedGreen,
-                device.Pins.OnboardLedBlue,
-                3.3f, 3.3f, 3.3f,
-                Peripherals.Leds.IRgbLed.CommonType.CommonAnode)
-
-    type RgbPwmLed with
-        member led.ShowColorPulse color duration =
-            led.StartPulse (color, duration / 2)
-            Thread.Sleep duration
-            led.Stop ()
-
-    let app duration (device:F7Micro) =
-        printfn "Starting app!"
-        let onboardLed = device.CreateLed ()
-        while true do
-            for color in colors do
-                onboardLed.ShowColorPulse color duration
+open System.Threading
 
 /// A helper module to adapt simple functions into the Meadow class / inheritance model.
 module MeadowRunner =
@@ -42,7 +13,7 @@ module MeadowRunner =
 
     /// Runs your F7Micro application.
     let runProgram (program:F7MicroApp) =
-        MeadowApp(program) |> ignore
+        MeadowApp (program) |> ignore
         Thread.Sleep Timeout.Infinite
         0
 
@@ -50,4 +21,4 @@ module MeadowRunner =
 let main args =
     match List.ofArray args with
     | "--exitOnDebug" :: _ -> 0
-    | _ -> MeadowRunner.runProgram (HelloWorld.app 1000)
+    | _ -> MeadowRunner.runProgram (Moisture.app)

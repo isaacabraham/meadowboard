@@ -9,12 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Helpers.fs" />
+    <Compile Include="HelloWorld.fs" />
+    <Compile Include="Moisture.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Meadow.F7" Version="0.*" />
     <PackageReference Include="Meadow.Foundation" Version="0.*" />
+    <PackageReference Include="Meadow.Foundation.Sensors.Moisture.Capacitive" Version="0.*" />
     <PackageReference Include="Meadow.Foundation.Displays.Lcd.CharacterDisplay" Version="0.8.34" />
   </ItemGroup>
 </Project>
