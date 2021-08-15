@@ -1,3 +1,3 @@
-dotnet build
-meadow app deploy -f bin\Debug\netstandard2.1\App.exe
+dotnet build -c Release
+meadow app deploy -f bin\Release\netstandard2.1\App.dll
 meadow listen
